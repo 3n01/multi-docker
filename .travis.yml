@@ -3,22 +3,22 @@ services:
     - docker
 
 before_install:
-    - docker build -t 3n01/multi-docker-test -f ./client/Dockerfile.dev ./client
+    - docker build -t encachram/multi-docker-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run 3n01/multi-docker-test npm test -- --coverage
+    - docker run encachram/multi-docker-test npm test -- --coverage
 
 after_success:
-    - docker build -t 3n01/multi-client ./client
-    - docker build -t 3n01/multi-nginx ./nginx
-    - docker build -t 3n01/multi-server ./server
-    - docker build -t 3n01/multi-worker ./worker
+    - docker build -t encachram/multi-client ./client
+    - docker build -t encachram/multi-nginx ./nginx
+    - docker build -t encachram/multi-server ./server
+    - docker build -t encachram/multi-worker ./worker
     # log in to th docker cli
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #take those images and push them to docker hub
-    - docker push 3n01/multi-client 
-    - docker push 3n01/multi-nginx 
-    - docker push 3n01/multi-server 
-    - docker push 3n01/multi-worker 
+    - docker push encachram/multi-client 
+    - docker push encachram/multi-nginx 
+    - docker push encachram/multi-server 
+    - docker push encachram/multi-worker 
 
 
